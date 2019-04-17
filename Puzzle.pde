@@ -38,13 +38,13 @@ class Tile{
 }
 Random rand = new Random();
 
-
-// TODO create pos_taken on random vals; Think about it.
 ArrayList<Tile> tiles = new ArrayList<Tile>();
-int[] pos_taken = new int[10];
+// The empty starting position is always in bottom right
 int pos_t=9;
 int pos_t_x=2;
 int pos_t_y=2;
+int my=-1,mx=-1;
+
 
 void shuffle(){
   for(int i=0;i<100;i++){
@@ -75,11 +75,9 @@ boolean checkForWin(){
   return true;
 }
 boolean won;
+
 void setup(){
-  size(301,400);
-  for(int i=0;i<9;i++){ // Initializing the array in order to shuffle the positions.
-    pos_taken[i]=0;    
-  }
+  size(301,400); // One more pixel to see the last right line
   int count=1;
   for(int i=0;i<3;i++){
     for(int j=0;j<3;j++){
@@ -89,12 +87,11 @@ void setup(){
      tiles.add(new Tile(j,i,count,count));
      count++;
      }
-  }
-  tiles.get(7).shift();
+  } 
   won=false;
-  //shuffle();
+  shuffle();
 }
-int my=-1,mx=-1;
+
 
 void draw(){
   if(!won){
